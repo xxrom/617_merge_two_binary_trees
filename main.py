@@ -51,3 +51,7 @@ my.printAll(merged)
 #     3
 #  4      5
 # 5  4    5  7
+
+# with additional merged tree:
+# Runtime: 108 ms, faster than 5.41% of Python3 online submissions for Merge Two Binary Trees.
+# Memory Usage: 14.1 MB, less than 22.86% of Python3 online submissions for Merge Two Binary Trees.

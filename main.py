@@ -18,27 +18,25 @@ class Solution:
         if root != None and root.right != None:
             self.printAll(root.right)
 
-    def mergeTrees(self, node0: Node, node1: Node, merged: Node = None) -> Node:
+    def mergeTrees(self, node0: Node, node1: Node) -> Node:
         if (node0 != None and node0.val != None) or (node1 != None and node1.val != None):
-            val0 = node0.val if node0 != None and node0.val != None else 0
-            val1 = node1.val if node1 != None and node1.val != None else 0
+            if node0 == None:
+                node0 = Node(0)
 
-            merged = Node(val0 + val1)
+            node0.val += node1.val if node1 != None and node1.val != None else 0
 
-            node0Left = node0.left if node0 != None and node0.left != None else None
             node1Left = node1.left if node1 != None and node1.left != None else None
-
-            node0Right = node0.right if node0 != None and node0.right != None else None
             node1Right = node1.right if node1 != None and node1.right != None else None
 
-            if node0Left != None or node1Left != None:
-                merged.left = self.mergeTrees(
-                    node0Left, node1Left, merged.left)
-            if node0Right != None or node1Right != None:
-                merged.right = self.mergeTrees(
-                    node0Right, node1Right, merged.right)
+            if node0.left != None or node1Left != None:
+                node0.left = self.mergeTrees(
+                    node0.left, node1Left)
+            if node0.right != None or node1Right != None:
+                node0.right = self.mergeTrees(
+                    node0.right, node1Right)
 
-        return merged
+        # merged tree - node0
+        return node0
 
 
 tree0 = Node(1, Node(3, Node(5)), Node(2))
@@ -55,3 +53,10 @@ my.printAll(merged)
 # with additional merged tree:
 # Runtime: 108 ms, faster than 5.41% of Python3 online submissions for Merge Two Binary Trees.
 # Memory Usage: 14.1 MB, less than 22.86% of Python3 online submissions for Merge Two Binary Trees.
+
+# without additional tree:
+# Runtime: 104 ms, faster than 9.26% of Python3 online submissions for Merge Two Binary Trees.
+# Memory Usage: 13.7 MB, less than 74.29% of Python3 online submissions for Merge Two Binary Trees.
+
+# Runtime: 96 ms, faster than 17.71% of Python3 online submissions for Merge Two Binary Trees.
+# Memory Usage: 13.8 MB, less than 68.57% of Python3 online submissions for Merge Two Binary Trees.

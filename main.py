@@ -10,6 +10,7 @@ class Node:
 
 
 class Solution:
+    # print all values
     def printAll(self, root):
         if root.val != None:
             print(root.val)
@@ -19,15 +20,20 @@ class Solution:
             self.printAll(root.right)
 
     def mergeTrees(self, node0: Node, node1: Node) -> Node:
+        # if one of the nodes exist
         if (node0 != None and node0.val != None) or (node1 != None and node1.val != None):
+            # We use node0 as merged one (for answer), so init it if needed
             if node0 == None:
                 node0 = Node(0)
 
+            # Merge (add) value from node1 (another one tree)
             node0.val += node1.val if node1 != None and node1.val != None else 0
 
+            # Find out values from node1 childrens (like shortcuts)
             node1Left = node1.left if node1 != None and node1.left != None else None
             node1Right = node1.right if node1 != None and node1.right != None else None
 
+            # If someone in the left/right exist, then merge deeper
             if node0.left != None or node1Left != None:
                 node0.left = self.mergeTrees(
                     node0.left, node1Left)
@@ -35,7 +41,7 @@ class Solution:
                 node0.right = self.mergeTrees(
                     node0.right, node1Right)
 
-        # merged tree - node0
+        # merged tree - node0 (result)
         return node0
 
 
